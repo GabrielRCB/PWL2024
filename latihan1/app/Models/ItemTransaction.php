@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ItemTransaction extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    public function Transaction(){
-        return $this->belongsTo(Transaction::class,'id_transaction');
-
+    public function Transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'id_transaction');
     }
 
-    public function Product(){
-        return $this->belongsTo(Product::class,'id_product');
-
+    public function Product()
+    {
+        return $this->belongsTo(Product::class, 'id_product');
     }
 }

@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestingController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -78,6 +80,27 @@ Route::group(['prefix'=>'app','middleware' => 'auth'],function (){
 Route::get('/', [KasirController::class,'index']);
 
 Route::post('/search-barcode', [KasirController::class,'searchProduct']);
+Route::post('/insert', [KasirController::class, 'insert']);
+});
+
+Route::group(['prefix'=> 'transaksi','middleware' => 'auth'],function(){
+Route::get('/',[TransaksiController::class,'index']);
+Route::get('/{id}/pdf',[TransaksiController::class,'printPDF']);
+});
+
+
+Route::group([
+    'middleware' => 'auth',
+    'prefix' => 'product'
+], function () {
+    Route::get('/', [ProductController::class, 'list']);
+//    Route::get('/{id}',[TeacherController::class,'detail']);
+    Route::get('/add', [ProductController::class, 'add']);
+    Route::get('/edit/{id}', [ProductController::class, 'edit']);
+
+    Route::post('/update', [ProductController::class, 'update']);
+    Route::post('/insert', [ProductController::class, 'insert']);
+    Route::post('/delete', [ProductController::class, 'delete']);
 });
 
 //Route::get('/latihan',function (){

@@ -8,10 +8,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    public function ItemTransaction(){
-        return $this->hasMany(ItemTransaction::class,'id_transaction');
+
+    public static function getLastCode($prefix)
+    {
+        $lastNumber = (int)Transaction::query()
+            ->where('code', 'like', $prefix . '%')
+            ->withTrashed()
+            ->get()->count();
+        return $prefix . str_pad(($lastNumber + 1), 4, '0', STR_PAD_LEFT);
 
     }
+
+    public function ItemTransaction()
+    {
+        return $this->hasMany(ItemTransaction::class, 'id_transaction');
+    }
+
+
 }

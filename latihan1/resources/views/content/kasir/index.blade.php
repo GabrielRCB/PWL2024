@@ -36,11 +36,24 @@
                     <div class="card-body">
                         <table width="100%">
                             <tr>
-                                <td>Total Belanja</td>
+                                <td>
+                                    <label for="">Subtotal</label>
+                                    <input type="text" readonly name="subtotal" id="subtotal"
+                                           class="form-control text-right">
+                                </td>
                             </tr>
-                            <tr class="bg-success">
-                                <td id="display-total-belanja"
-                                    class="h2 text-right"></td>
+                            <tr>
+                                <td>
+                                    <label for="">Discount (%)</label>
+                                    <input type="number" min="0" max="100" name="discount" id="discount"
+                                           value='0' class="form-control text-right">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="">Total</label>
+                                    <input type="text" readonly name="total" id="total" class="form-control text-right">
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -116,8 +129,15 @@
                     subtotal += parseInt(price) * parseInt(qty);
                     console.log(price, qty);
                 });
-                $('#display-total-belanja').text(subtotal);
+                let discount = parseInt($('#discount').val());
+                let total = subtotal - (subtotal * discount / 100);
+                $('#subtotal').val(subtotal);
+                $('#total').val(total);
             }
+
+            $('#discount').on('change', function () {
+                hitungTotalBelanja();
+            });
         });
     </script>
 @endpush

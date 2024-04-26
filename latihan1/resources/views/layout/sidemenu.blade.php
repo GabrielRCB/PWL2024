@@ -36,8 +36,22 @@
                     <a href="{{url('/app')}}" class="nav-link">
                         <i class="nav-icon fas fa-cash-register"></i>
                         <p>
-                            Kasir
+                        Aplikasi Kasir
                         </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url('/transaksi')}}" class="nav-link">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Data Transaksi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/product') }}" class="nav-link">
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>Products</p>
                     </a>
                 </li>
             </ul>
